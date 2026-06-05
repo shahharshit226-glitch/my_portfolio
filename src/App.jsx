@@ -426,10 +426,39 @@ function About() {
   const visible = useIntersection(ref);
 
   const interests = [
-    { icon: "🤖", label: "AI & NLP Systems" },
-    { icon: "🌐", label: "Full-Stack Web Dev" },
-    { icon: "🚀", label: "Startup Building" },
-    { icon: "🧩", label: "Problem Solving" },
+    {
+      svg: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/>
+          <path d="M12 7v4M8 15h.01M12 15h.01M16 15h.01"/>
+        </svg>
+      ),
+      label: "AI & NLP Systems",
+    },
+    {
+      svg: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12a15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      ),
+      label: "Full-Stack Web Dev",
+    },
+    {
+      svg: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      ),
+      label: "Startup Building",
+    },
+    {
+      svg: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      ),
+      label: "Problem Solving",
+    },
   ];
 
   return (
@@ -449,14 +478,20 @@ function About() {
           background: rgba(255,255,255,0.02);
           transition: border-color 0.3s, background 0.3s, transform 0.25s;
           cursor: default;
+          display: flex; flex-direction: column; gap: 0.75rem;
         }
         .interest-card:hover {
           border-color: rgba(99,220,180,0.3);
           background: rgba(99,220,180,0.04);
           transform: translateY(-3px);
         }
-        .interest-icon { font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
-        .interest-label { font-size: 0.83rem; font-weight: 600; color: var(--fg); font-family: 'Syne', sans-serif; }
+        .interest-icon {
+          width: 40px; height: 40px;
+          display: flex; align-items: center; justify-content: center;
+          background: rgba(99,220,180,0.08); border-radius: 8px;
+          flex-shrink: 0;
+        }
+        .interest-label { font-size: 0.83rem; font-weight: 600; color: var(--fg); font-family: 'Syne', sans-serif; line-height: 1.3; }
         .about-meta {
           margin-top: 2rem; padding-top: 2rem;
           border-top: 1px solid rgba(255,255,255,0.06);
@@ -470,6 +505,8 @@ function About() {
         }
         @media (max-width: 480px) {
           .interests-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+          .interest-card { padding: 1rem; }
+          .interest-label { font-size: 0.78rem; }
         }
       `}</style>
       <section id="about" ref={ref}>
@@ -519,7 +556,7 @@ function About() {
             <div className="interests-grid">
               {interests.map((i) => (
                 <div className="interest-card" key={i.label}>
-                  <span className="interest-icon">{i.icon}</span>
+                  <div className="interest-icon">{i.svg}</div>
                   <span className="interest-label">{i.label}</span>
                 </div>
               ))}
