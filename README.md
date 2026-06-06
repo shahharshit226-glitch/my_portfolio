@@ -40,4 +40,4 @@ Personal portfolio website built with React. Features my projects, skills, and s
 - GitHub: [@shahharshit226-glitch](https://github.com/shahharshit226-glitch)
 - LinkedIn: [harshitshah506](https://www.linkedin.com/in/harshitshah506)
 - Email: shahharshit226@gmail.com
-- Startup: [resalebrt.com](https://resalebrt.com)
+- Startup: [resalebrt.com](https://resalebrt.com).
