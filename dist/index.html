@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harshit Shah — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="module" crossorigin src="/assets/index-awUvO-lP.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C5fmrckV.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">HS</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <button class="nav-drawer-close" id="drawer-close">✕</button>
+  <a href="#about" class="drawer-link">About</a>
+  <a href="#projects" class="drawer-link">Projects</a>
+  <a href="#experience" class="drawer-link">Experience</a>
+  <a href="#contact" class="drawer-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-eyebrow">Full-Stack Developer &amp; Startup Founder</div>
+  <h1 class="hero-name">Harshit<br/><em>Shah</em></h1>
+  <div class="hero-sub">
+    <p class="hero-desc">
+      B.Tech CSE @ KIIT University. I build AI-powered products and ship things that go live —
+      from NLP resume tools to a local marketplace serving Biratnagar.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-white" href="#projects">View Work</a>
+      <a class="btn btn-outline" href="https://github.com/shahharshit226-glitch" target="_blank">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <div class="about-grid reveal">
+    <div>
+      <h2 class="about-headline">Building things<br/>that <span>actually</span><br/>go live.</h2>
+      <div class="about-body">
+        <p>I'm a 4th-year Computer Science student at KIIT University with a <strong>CGPA of 7.8</strong>,
+        currently building in public — shipping AI tools, full-stack apps, and a live startup MVP.</p>
+        <p style="margin-top:1rem;">I founded <strong>ResaleBrt</strong>, a local resale marketplace for Biratnagar that's live
+        and gaining real users. I also built an AI Resume Analyzer with an agentic email pipeline,
+        and led website development for the Elabs Society at KIIT.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <span class="stat-val">1450+</span>
+          <span class="stat-label">LeetCode Rating</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val">100+</span>
+          <span class="stat-label">Problems Solved</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val">4th yr</span>
+          <span class="stat-label">B.Tech CSE</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val">7.8</span>
+          <span class="stat-label">KIIT CGPA</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;font-family:'DM Mono',monospace;">Tech Stack</p>
+      <div class="skills-cloud">
+        <span class="skill-pill">React</span><span class="skill-pill">Next.js</span>
+        <span class="skill-pill">TypeScript</span><span class="skill-pill">Node.js</span>
+        <span class="skill-pill">FastAPI</span><span class="skill-pill">Python</span>
+        <span class="skill-pill">Supabase</span><span class="skill-pill">MongoDB</span>
+        <span class="skill-pill">Java</span><span class="skill-pill">SQL</span>
+        <span class="skill-pill">spaCy</span><span class="skill-pill">NLP</span>
+        <span class="skill-pill">Docker</span><span class="skill-pill">Git</span>
+        <span class="skill-pill">Tailwind CSS</span><span class="skill-pill">REST APIs</span>
+        <span class="skill-pill">OpenCV</span><span class="skill-pill">Firebase</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-header reveal">
+    <div>
+      <div class="section-label">02 — Projects</div>
+      <h2 class="projects-headline">Selected Work</h2>
+    </div>
+    <span class="projects-count">04 Projects</span>
+  </div>
+  <div class="projects-grid reveal">
+
+    <!-- ResaleBrt -->
+    <div class="project-card startup" id="card-1">
+      <span class="project-num">001</span>
+      <span class="project-badge">Live Startup MVP</span>
+      <h3 class="project-title">ResaleBrt</h3>
+      <p class="project-desc">A community-first local resale marketplace built for Biratnagar. Admin-reviewed listings, WhatsApp seller contact, fast listing flow. Real users, real traction.</p>
+      <div class="project-tags">
+        <span class="project-tag">Next.js</span><span class="project-tag">TypeScript</span>
+        <span class="project-tag">Supabase</span><span class="project-tag">Tailwind CSS</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link demo" href="https://resalebrt.com" target="_blank">Live Site ↗</a>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+    <!-- AI Resume Analyzer -->
+    <div class="project-card" id="card-2">
+      <span class="project-num">002</span>
+      <span class="project-badge">AI / NLP</span>
+      <h3 class="project-title">AI Resume Analyzer</h3>
+      <p class="project-desc">NLP-powered resume parser with ATS scoring, skill extraction via spaCy, and an email-based agentic pipeline. Fully automated. Live on Vercel.</p>
+      <div class="project-tags">
+        <span class="project-tag">FastAPI</span><span class="project-tag">React</span>
+        <span class="project-tag">spaCy</span><span class="project-tag">Python</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link demo" href="https://resume-analyzer-agent-2llu.vercel.app" target="_blank">Live Demo ↗</a>
+        <a class="project-link gh" href="https://github.com/shahharshit226-glitch/Resume_analyzer_agent" target="_blank">GitHub</a>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+    <!-- E-Complaint -->
+    <div class="project-card" id="card-3">
+      <span class="project-num">003</span>
+      <span class="project-badge">Full-Stack</span>
+      <h3 class="project-title">E-Complaint Management</h3>
+      <p class="project-desc">Full-stack complaint tracking system with admin dashboard, real-time status updates, and complete resolution workflow built on MongoDB.</p>
+      <div class="project-tags">
+        <span class="project-tag">Node.js</span><span class="project-tag">Express</span>
+        <span class="project-tag">MongoDB</span><span class="project-tag">JS</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link gh" href="https://github.com/shahharshit226-glitch" target="_blank">GitHub</a>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+    <!-- Spotify Clone -->
+    <div class="project-card" id="card-4">
+      <span class="project-num">004</span>
+      <span class="project-badge">Frontend</span>
+      <h3 class="project-title">Spotify Clone v2</h3>
+      <p class="project-desc">Pixel-perfect Spotify frontend clone with interactive player controls, dynamic playlist UI, and fully responsive layout — built to master CSS precision.</p>
+      <div class="project-tags">
+        <span class="project-tag">JavaScript</span><span class="project-tag">HTML5</span>
+        <span class="project-tag">CSS3</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link gh" href="https://github.com/shahharshit226-glitch/Spotify_clone2" target="_blank">GitHub</a>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 — Experience</div>
+  <div class="exp-grid reveal">
+    <div class="exp-sticky">
+      <h2>Where I've<br/>shipped work.</h2>
+    </div>
+    <div>
+      <div class="exp-list">
+        <div class="exp-item">
+          <span class="exp-date">Feb 2026</span>
+          <div>
+            <div class="exp-role">Website Developer</div>
+            <div class="exp-org">Elabs Society · KIIT University</div>
+            <ul class="exp-points">
+              <li>Designed and developed the official society website with responsive, dynamic UI</li>
+              <li>Integrated REST APIs for real-time event and announcement management</li>
+              <li>Optimized for cross-browser compatibility and student-first UX</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-item">
+          <span class="exp-date">2024 — Now</span>
+          <div>
+            <div class="exp-role">Founder &amp; Developer</div>
+            <div class="exp-org">ResaleBrt · Biratnagar, Nepal</div>
+            <ul class="exp-points">
+              <li>Built and launched a live local resale marketplace MVP from scratch</li>
+              <li>Designed the full product — from DB schema to UI to admin workflows</li>
+              <li>Actively gathering user feedback to iterate and grow the platform</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="ach-row" style="margin-top:3rem;">
+        <div class="ach-card"><span class="ach-val">1450+</span><span class="ach-lbl">LeetCode</span></div>
+        <div class="ach-card"><span class="ach-val">100+</span><span class="ach-lbl">Problems</span></div>
+        <div class="ach-card"><span class="ach-val">★</span><span class="ach-lbl">CodeChef</span></div>
+        <div class="ach-card"><span class="ach-val">7.8</span><span class="ach-lbl">KIIT CGPA</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">04 — Contact</div>
+  <div class="contact-inner reveal">
+    <h2 class="contact-headline">Let's build<br/>something <em>real.</em></h2>
+    <div class="contact-grid">
+      <form class="contact-form" id="contact-form">
+        <div class="form-field">
+          <label>Name</label>
+          <input type="text" placeholder="Your name" required/>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com" required/>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="What's on your mind?" rows="4" required></textarea>
+        </div>
+        <button class="form-submit" type="submit">Send Message →</button>
+      </form>
+      <div>
+        <div class="contact-links">
+          <a class="contact-link" href="https://github.com/shahharshit226-glitch" target="_blank">
+            GitHub <span class="contact-link-arrow">↗</span>
+          </a>
+          <a class="contact-link" href="https://www.linkedin.com/in/harshitshah506" target="_blank">
+            LinkedIn <span class="contact-link-arrow">↗</span>
+          </a>
+          <a class="contact-link" href="mailto:shahharshit226@gmail.com">
+            shahharshit226@gmail.com <span class="contact-link-arrow">↗</span>
+          </a>
+          <a class="contact-link" href="https://resalebrt.com" target="_blank">
+            ResaleBrt — My Startup <span class="contact-link-arrow">↗</span>
+          </a>
+        </div>
+        <p style="margin-top:2rem;font-size:0.78rem;color:var(--muted);line-height:1.8;">
+          Open to internships, freelance, and startup collaborations.<br/>
+          Based at KIIT University, Bhubaneswar.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 <span>Harshit Shah</span>. Built with React.</span>
+  <span class="footer-copy">Open to Internships ·  <span style="color:var(--accent);">Available Now</span></span>
+</footer>
+
+</body>
+</html>
