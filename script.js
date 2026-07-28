@@ -2,10 +2,19 @@
 const drawer = document.getElementById('nav-drawer');
 const ham = document.getElementById('hamburger');
 const drawerClose = document.getElementById('drawer-close');
-ham.addEventListener('click',()=>drawer.classList.add('open'));
-drawerClose.addEventListener('click',()=>drawer.classList.remove('open'));
+ham.addEventListener('click',()=>{
+  drawer.classList.add('open');
+  document.body.classList.add('drawer-open');
+});
+drawerClose.addEventListener('click',()=>{
+  drawer.classList.remove('open');
+  document.body.classList.remove('drawer-open');
+});
 document.querySelectorAll('.drawer-link').forEach(a=>{
-  a.addEventListener('click',()=>drawer.classList.remove('open'));
+  a.addEventListener('click',()=>{
+    drawer.classList.remove('open');
+    document.body.classList.remove('drawer-open');
+  });
 });
 
 // ── CURSOR ──────────────────────────────────────────────────────────────────

@@ -50,6 +50,10 @@ nav{
   .nav-hamburger{display:flex;}
 }
 
+body.drawer-open .nav-hamburger {
+  display: none !important;
+}
+
 /* ── HERO ── */
 #hero{
   position:relative;height:100vh;min-height:600px;
@@ -320,7 +324,7 @@ footer{
 
 /* ── MOBILE NAV DRAWER ── */
 .nav-drawer{
-  position:fixed;inset:0;background:#000;z-index:99;
+  position:fixed;inset:0;background:#000;z-index:101;
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
   padding:0 2rem;
   transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.77,0,0.18,1);
@@ -336,12 +340,14 @@ footer{
   position:absolute;top:1.5rem;right:1.5rem;
   background:none;border:none;color:#fff;font-size:1.5rem;
   cursor:pointer;padding:0.5rem;line-height:1;
+  display:none;
 }
+.nav-drawer.open .nav-drawer-close{display:block;}
 
 /* ── HERO MOBILE ── */
 @media(max-width:640px){
   .nav-links{display:none;}
-  .nav-hamburger{display:flex;}
+  /* .nav-hamburger is already set in the NAV section */
   #hero{justify-content:flex-end;padding-bottom:3rem;}
   .hero-eyebrow{font-size:0.6rem;margin-bottom:1rem;}
   .hero-sub{flex-direction:column;gap:1.5rem;align-items:flex-start;}
@@ -414,3 +420,4 @@ footer{
 /* ── ANIMATIONS ── */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
+
