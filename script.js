@@ -120,12 +120,50 @@ const obs=new IntersectionObserver(entries=>{
 revEls.forEach(el=>obs.observe(el));
 
 // ── CONTACT FORM ─────────────────────────────────────────────────────────────
-document.getElementById('contact-form').addEventListener('submit',function(e){
+document.getElementById('contact-form').addEventListener('submit',async function(e){
   e.preventDefault();
-  const name=this.querySelector('input[type=text]').value;
-  const email=this.querySelector('input[type=email]').value;
-  const msg=this.querySelector('textarea').value;
-  window.location.href=`mailto:shahharshit226@gmail.com?subject=Portfolio Contact from ${name}&body=${encodeURIComponent(msg)}%0A%0AFrom: ${name}%0AEmail: ${email}`;
+  const form = this;
+  const btn = form.querySelector('.form-submit');
+  const originalText = btn.textContent;
+
+  const name  = form.querySelector('input[type=text]').value.trim();
+  const email = form.querySelector('input[type=email]').value.trim();
+  const msg   = form.querySelector('textarea').value.trim();
+
+  if (!name || !email || !msg) return;
+
+  // Disable button + show sending state
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/xrbpgrey', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message: msg })
+    });
+
+    if (res.ok) {
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#16a34a';
+      form.reset();
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        btn.style.background = '';
+      }, 3000);
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch (err) {
+    btn.textContent = 'Error – Try Again';
+    btn.style.background = '#dc2626';
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+    }, 2500);
+  }
 });
 
 // ── SMOOTH NAV ────────────────────────────────────────────────────────────────
