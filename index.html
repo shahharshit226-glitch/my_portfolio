@@ -233,20 +233,21 @@
   <div class="contact-inner reveal">
     <h2 class="contact-headline">Let's build<br/>something <em>real.</em></h2>
     <div class="contact-grid">
-      <form class="contact-form" id="contact-form">
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/xljegeva" method="POST">
         <div class="form-field">
           <label>Name</label>
-          <input type="text" placeholder="Your name" required/>
+          <input type="text" name="name" placeholder="Your name" required/>
         </div>
         <div class="form-field">
           <label>Email</label>
-          <input type="email" placeholder="your@email.com" required/>
+          <input type="email" name="email" placeholder="your@email.com" required/>
         </div>
         <div class="form-field">
           <label>Message</label>
-          <textarea placeholder="What's on your mind?" rows="4" required></textarea>
+          <textarea name="message" placeholder="What's on your mind?" rows="4" required></textarea>
         </div>
         <button class="form-submit" type="submit">Send Message →</button>
+        <p class="form-status" id="form-status" aria-live="polite"></p>
       </form>
       <div>
         <div class="contact-links">

@@ -124,44 +124,48 @@ document.getElementById('contact-form').addEventListener('submit',async function
   e.preventDefault();
   const form = this;
   const btn = form.querySelector('.form-submit');
+  const status = document.getElementById('form-status');
   const originalText = btn.textContent;
-
-  const name  = form.querySelector('input[type=text]').value.trim();
-  const email = form.querySelector('input[type=email]').value.trim();
-  const msg   = form.querySelector('textarea').value.trim();
-
-  if (!name || !email || !msg) return;
 
   // Disable button + show sending state
   btn.textContent = 'Sending…';
   btn.disabled = true;
+  status.textContent = '';
 
   try {
-    const res = await fetch('https://formspree.io/f/xrbpgrey', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message: msg })
+    const res = await fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
     });
 
     if (res.ok) {
       btn.textContent = 'Message Sent ✓';
       btn.style.background = '#16a34a';
+      status.textContent = 'Thanks — your message has been sent.';
+      status.className = 'form-status success';
       form.reset();
       setTimeout(() => {
         btn.textContent = originalText;
         btn.disabled = false;
         btn.style.background = '';
+        status.textContent = '';
+        status.className = 'form-status';
       }, 3000);
     } else {
-      throw new Error('Submission failed');
+      throw new Error(`Submission failed (${res.status})`);
     }
   } catch (err) {
     btn.textContent = 'Error – Try Again';
     btn.style.background = '#dc2626';
+    status.textContent = 'Could not send your message. Please try again.';
+    status.className = 'form-status error';
     btn.disabled = false;
     setTimeout(() => {
       btn.textContent = originalText;
       btn.style.background = '';
+      status.textContent = '';
+      status.className = 'form-status';
     }, 2500);
   }
 });
