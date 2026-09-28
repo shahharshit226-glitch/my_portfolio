@@ -1,4 +1,46 @@
 // ── MOBILE NAV DRAWER ────────────────────────────────────────────────────────
+// OPENING LOADER
+(() => {
+  const screen = document.getElementById('loading-screen');
+  const percentLabel = document.getElementById('loading-percent');
+  const wrap = document.getElementById('loading-wrap');
+  if (!screen || !percentLabel || !wrap) return;
+  if (window.innerWidth <= 768) {
+    screen.remove();
+    return;
+  }
+
+  document.body.classList.add('is-loading');
+  let progress = 0;
+  let pageReady = document.readyState === 'complete';
+  const progressTimer = window.setInterval(() => {
+    if (pageReady) {
+      progress = Math.min(100, progress + Math.max(1, Math.ceil((100 - progress) / 12)));
+    } else {
+      progress = Math.min(88, progress + (progress < 55 ? 2 : 1));
+    }
+    percentLabel.textContent = `${progress}%`;
+    if (progress >= 100) {
+      window.clearInterval(progressTimer);
+      screen.classList.add('is-complete');
+      window.setTimeout(() => {
+        screen.classList.add('is-exiting');
+        window.setTimeout(() => {
+          screen.remove();
+          document.body.classList.remove('is-loading');
+        }, 1200);
+      }, 800);
+    }
+  }, 70);
+
+  window.addEventListener('load', () => { pageReady = true; }, { once: true });
+  wrap.addEventListener('pointermove', event => {
+    const rect = wrap.getBoundingClientRect();
+    wrap.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
+    wrap.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
+  });
+})();
+
 const drawer = document.getElementById('nav-drawer');
 const ham = document.getElementById('hamburger');
 const drawerClose = document.getElementById('drawer-close');
