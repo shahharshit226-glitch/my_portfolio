@@ -97,6 +97,22 @@ body.drawer-open .nav-hamburger {
 .hero-eyebrow,.hero-name,.hero-sub{
   position:relative;z-index:2;
 }
+/* Reveal the hero once the opening loader has finished. */
+#hero .hero-eyebrow,#hero .hero-name,#hero .hero-sub{
+  opacity:1;filter:blur(0);
+  transition:opacity .9s ease,filter 1s ease;
+}
+body.is-loading #hero .hero-eyebrow,body.is-loading #hero .hero-name,body.is-loading #hero .hero-sub{
+  opacity:0;filter:blur(12px);
+  transition:none;
+}
+#hero .hero-profile,#hero .hero-scroll-hint{transition:opacity .9s ease,transform 1s cubic-bezier(.2,.75,.25,1);}
+body.is-loading #hero .hero-profile,body.is-loading #hero .hero-scroll-hint{opacity:0;transform:translateY(24px);transition:none;}
+body:not(.is-loading) #hero .hero-eyebrow{transition-delay:.08s;}
+body:not(.is-loading) #hero .hero-name{transition-delay:.2s;}
+body:not(.is-loading) #hero .hero-sub{transition-delay:.38s;}
+body:not(.is-loading) #hero .hero-profile{transition-delay:.3s;}
+body:not(.is-loading) #hero .hero-scroll-hint{transition-delay:.55s;}
 .hero-eyebrow{
   font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;
   color:var(--accent);font-weight:600;margin-bottom:1.5rem;
@@ -104,7 +120,7 @@ body.drawer-open .nav-hamburger {
 }
 .hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--accent);}
 .hero-name{
-  font-size:clamp(3.5rem,10vw,9rem);font-weight:900;line-height:0.92;
+  font-size:clamp(3.5rem,10vw,10rem);font-weight:900;line-height:0.92;
   letter-spacing:-0.04em;color:#fff;margin-bottom:2rem;
   position:relative;z-index:1;
 }
