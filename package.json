@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/copy-public.js",
+    "vercel-build": "vite build && node scripts/copy-public.js",
     "preview": "vite preview"
   },
   "devDependencies": {
