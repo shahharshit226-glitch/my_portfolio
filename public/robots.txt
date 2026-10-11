@@ -1,0 +1,14 @@
+# robots.txt for https://harshitshah.com.np
+# Allows all crawlers to access all content
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://harshitshah.com.np/sitemap.xml
+
+# Crawl-delay (optional, polite)
+Crawl-delay: 10
+
+# Host directive for preferred domain
+Host: https://harshitshah.com.np

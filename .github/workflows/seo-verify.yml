@@ -1,0 +1,136 @@
+# GitHub Actions workflow for Vercel deployment verification
+# This workflow runs on every push to main and can be used to verify SEO elements
+
+name: SEO & Deploy Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Verify SEO elements in build
+        run: |
+          echo "🔍 Verifying SEO elements in dist/index.html..."
+
+          # Check for required meta tags
+          REQUIRED_TAGS=(
+            'meta name="description"'
+            'meta name="robots"'
+            'link rel="canonical"'
+            'meta property="og:title"'
+            'meta property="og:description"'
+            'meta property="og:image"'
+            'meta property="og:url"'
+            'meta name="twitter:card"'
+            'meta name="twitter:title"'
+            'meta name="twitter:description"'
+            'meta name="twitter:image"'
+            'application/ld+json'
+            'rel="icon"'
+            'rel="manifest"'
+          )
+
+          for tag in "${REQUIRED_TAGS[@]}"; do
+            if grep -q "$tag" dist/index.html; then
+              echo "✅ Found: $tag"
+            else
+              echo "❌ MISSING: $tag"
+              exit 1
+            fi
+          done
+
+          # Verify structured data is valid JSON
+          echo "🔍 Validating JSON-LD structured data..."
+          node -e "
+            const fs = require('fs');
+            const html = fs.readFileSync('dist/index.html', 'utf8');
+            const regex = /<script type=\"application\/ld\+json\">([\s\S]*?)<\/script>/g;
+            let match;
+            let hasError = false;
+            while ((match = regex.exec(html)) !== null) {
+              try {
+                JSON.parse(match[1].trim());
+              } catch (e) {
+                console.error('❌ Invalid JSON-LD:', e.message);
+                console.error('Content:', match[1].substring(0, 200));
+                hasError = true;
+              }
+            }
+            if (!hasError) console.log('✅ All JSON-LD blocks are valid JSON');
+            else process.exit(1);
+          "
+
+          # Verify public files exist
+          REQUIRED_FILES=(
+            'dist/robots.txt'
+            'dist/sitemap.xml'
+            'dist/favicon.svg'
+            'dist/site.webmanifest'
+          )
+
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✅ Found: $file"
+            else
+              echo "❌ MISSING: $file"
+              exit 1
+            fi
+          done
+
+          echo "🎉 All SEO verification checks passed!"
+
+      - name: Check file sizes
+        run: |
+          echo "📊 Build output sizes:"
+          du -h dist/
+          echo ""
+          echo "📦 Asset sizes:"
+          ls -lh dist/assets/
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  # Optional: Deploy to Vercel preview (requires Vercel token)
+  # deploy-preview:
+  #   needs: build-and-verify
+  #   if: github.event_name == 'pull_request'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: dist
+  #         path: dist/
+  #     - name: Deploy to Vercel Preview
+  #       uses: amondnet/vercel-action@v25
+  #       with:
+  #         vercel-token: ${{ secrets.VERCEL_TOKEN }}
+  #         vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+  #         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+  #         vercel-args: '--prod=false'
+  #       env:
+  #         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
