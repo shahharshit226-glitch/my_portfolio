@@ -40,7 +40,15 @@ body.is-loading{overflow:hidden;}
 .loading-screen.is-complete .loading-welcome{opacity:1;transform:translateY(0);transition-delay:.2s;}
 .loading-screen.is-exiting .loading-wrap{min-width:150vw;min-height:150vh;border-radius:50%;box-shadow:none;}
 @keyframes loaderBlink{50%{opacity:0;}}
-@media(max-width:768px){.loading-screen{display:none;}}
+@media(max-width:768px){
+  .loading-header,.loading-footer{left:1rem;right:1rem;}
+  .loader-title{font-size:.72rem;letter-spacing:.1em;}
+  .loader-caption,.loading-footer{font-size:.55rem;letter-spacing:.1em;}
+  .loading-marquee{font-size:clamp(2rem,11vw,3.75rem);}
+  .loading-wrap{width:min(78vw,250px);min-width:0;min-height:64px;}
+  .loading-button{padding:.9rem 1rem;font-size:.7rem;letter-spacing:.05em;}
+  .loading-screen.is-exiting .loading-wrap{min-width:180vw;min-height:180vh;}
+}
 @media(prefers-reduced-motion:reduce){.loading-marquee-track{animation-duration:90s}.loading-screen,.loading-wrap,.loading-button,.loading-welcome{transition-duration:.2s}}
 
 /* ── NAV ── */

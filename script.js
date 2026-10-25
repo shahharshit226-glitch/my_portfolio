@@ -5,10 +5,6 @@
   const percentLabel = document.getElementById('loading-percent');
   const wrap = document.getElementById('loading-wrap');
   if (!screen || !percentLabel || !wrap) return;
-  if (window.innerWidth <= 768) {
-    screen.remove();
-    return;
-  }
 
   document.body.classList.add('is-loading');
   let progress = 0;
@@ -62,9 +58,18 @@ document.querySelectorAll('.drawer-link').forEach(a=>{
 // ── 3D HERO CANVAS ──────────────────────────────────────────────────────────
 (function(){
   const canvas = document.getElementById('hero-canvas');
+  // The portfolio should remain usable when the optional Three.js CDN is
+  // unavailable or WebGL is disabled. Skip only the decorative hero effect.
+  if (!canvas || !window.THREE || !window.WebGLRenderingContext) return;
   const isMobile = window.innerWidth < 768;
 
-  const renderer = new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  } catch (error) {
+    console.warn('WebGL is unavailable; skipping the decorative hero effect.', error);
+    return;
+  }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
   renderer.setSize(canvas.offsetWidth||window.innerWidth, canvas.offsetHeight||window.innerHeight);
 
