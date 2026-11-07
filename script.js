@@ -37,6 +37,25 @@
   });
 })();
 
+// ── AUTOPLAY PROJECT VIDEOS ──────────────────────────────────────────────────
+document.querySelectorAll('.project-video video').forEach(video => {
+  video.controls = false;
+  video.muted = true;
+  video.defaultMuted = true;
+  video.loop = true;
+  video.playsInline = true;
+
+  const startVideo = () => {
+    video.play().catch(() => {
+      // Browsers can defer autoplay until the media element is ready.
+    });
+  };
+
+  video.addEventListener('canplay', startVideo, { once: true });
+  video.addEventListener('loadedmetadata', startVideo, { once: true });
+  startVideo();
+});
+
 const drawer = document.getElementById('nav-drawer');
 const ham = document.getElementById('hamburger');
 const drawerClose = document.getElementById('drawer-close');
@@ -139,25 +158,6 @@ document.querySelectorAll('.drawer-link').forEach(a=>{
     renderer.setSize(w,h);
   });
 })();
-
-// ── PROJECT CARDS 3D TILT (desktop only) ────────────────────────────────────
-if(window.matchMedia('(hover:hover)').matches){
-  document.querySelectorAll('.project-card').forEach(card=>{
-    card.addEventListener('mousemove',e=>{
-      const r=card.getBoundingClientRect();
-      const x=e.clientX-r.left,y=e.clientY-r.top;
-      const cx=r.width/2,cy=r.height/2;
-      const rotX=-(y-cy)/cx*6;
-      const rotY=(x-cx)/cx*6;
-      card.style.transform=`perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
-      card.style.setProperty('--mx',`${x/r.width*100}%`);
-      card.style.setProperty('--my',`${y/r.height*100}%`);
-    });
-    card.addEventListener('mouseleave',()=>{
-      card.style.transform='perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-    });
-  });
-}
 
 // ── SCROLL REVEALS ───────────────────────────────────────────────────────────
 const revEls=document.querySelectorAll('.reveal');
